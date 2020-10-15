@@ -79,6 +79,6 @@ kWNN = function(xl,z,k,q){
 ## Карты классификации 6NN, 6WNN и 1NN
 
 <img src="https://github.com/VivaHades/SMPR/blob/main/6NN.png" />
-<img src="https://github.com/VivaHades/SMPR/blob/main/6NN.png" />
+<img src="https://github.com/VivaHades/SMPR/blob/main/KWNN.png" />
 <img src="https://github.com/VivaHades/SMPR/blob/main/1NN.png" />
 
