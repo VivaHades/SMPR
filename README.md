@@ -4,16 +4,22 @@
 Сначала отобразим выборку на плоскости. Для этого создадим вектор цветов координаты которого будут соответствовать разным видам цветов.
 Далее, с помощью функции plot() отобразим все объекты на плоскости.  
 <img src="https://github.com/VivaHades/SMPR/blob/main/XL.png" />
+
 Рассмотрим алгоритм.
 Для реализации нам понадобятся две функции - функция вычисления евклидова расстояния, и функция-классификатор - алгоритм  1NN.
 ```r
-OneNN = function(xl,z){                   #xl-выборка, z - классифицируемая точка
-  orderedXl = sortObjectsByDist(xl, z)    #сортируем по расстоянию
-  n = dim(orderedXl)[2] - 1
-  classes = orderedXl[1:k, n+1]           #массив k-ближайших соседей
-  counts = table(classes)                 #вычисляем количество вхождений каждого класса среди k ближайших
-  class = names(which.max(counts))        #вычисляем класс, который вошел в k ближайших больше всего раз
-  return (class)                          
+NN = function(xl,z){
+  l = dim(xl)[1]
+  n = dim(xl)[2] - 1
+  
+  distances = matrix(NA, l, 1)
+  
+  for(i in 1:l){
+    distances[i, ] = euclDistance(xl[i, 1:n], z)
+  }
+  distances = cbind(xl, distances)       #связываем по столбцам массив расстояний и выборку
+  min = which.min(distances[, 4])        #ищем и вызвращаем минимальный элемент
+  return (distances[min, 3])
 }
 ```
 ## Метод k-ближайших соседей
