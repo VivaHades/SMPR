@@ -41,7 +41,7 @@ NN = function(xl,z){   #xl-выборка, z - классифицируемая 
   return (distances[min, 3])
 }
 ```
-## Метод k-ближайших соседей
+## Метод k ближайших соседей
 
 Перейдем к рассмотрению алгоритма KNN.
 
@@ -55,7 +55,30 @@ kNN = function(xl,z,k){                   #k - число соседей
   return (class)                          
 }
 ```
-Карты классификации 6NN и 1NN
+
+Метод можно оптимизировать - не сортировать всю выборку, а  пробежать ее k раз, находя новый минимальный, старый при этом убирать и сразу добавлять в массив classes.
+
+## Метод k взвешенных ближайших соседей
+Данный метод - модификация KNN, в которой добавляется весовая функция. Теперь, прежде чем классифицировать объект, мы будем проверять элементы какого класса имеют больший вес. В качестве весовой функции выбрана **q^i**, где q - еще один параметр, который можно подбирать,а i - индекс элемента из k ближайших.
+``` r
+kWNN = function(xl,z,k,q){
+  orderedXl = sortObjectsByDist(xl, z)
+  n = dim(orderedXl)[2] - 1
+  classes = orderedXl[1:k, n+1]
+  counts = table(classes)
+  counts[1:length(counts)] = 0 #обнуляем
+  
+  for (i in 1:k) {
+    counts[classes[i]] <- counts[classes[i]] + q^i #вычисляем веса 
+  }
+  class = names(which.max(counts))
+  return (class)
+}
+```
+
+## Карты классификации 6NN, 6WNN и 1NN
 
 <img src="https://github.com/VivaHades/SMPR/blob/main/6NN.png" />
+<img src="https://github.com/VivaHades/SMPR/blob/main/6NN.png" />
 <img src="https://github.com/VivaHades/SMPR/blob/main/1NN.png" />
+
