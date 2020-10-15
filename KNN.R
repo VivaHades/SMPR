@@ -2,10 +2,10 @@ euclDistance = function(u,v){
   sqrt(sum((u-v)^2))
 }
 sortObjectsByDist = function(xl,z, metricFunction = euclDistance){
-  l = dim(xl)[1]
-  n = dim(xl)[2] - 1
+  l = dim(xl)[1]       #число элементов в выборке
+  n = dim(xl)[2] - 1   #число признаков объекта
   
-  distances = matrix(NA, l, 2)
+  distances = matrix(NA, l, 2) #матрица расстояний
   
   for(i in 1:l){
     distances[i, ] = c(i, metricFunction(xl[i, 1:n], z))
