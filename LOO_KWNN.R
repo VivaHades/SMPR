@@ -1,4 +1,3 @@
-require(gplots)
 euclDistance = function(u,v){
   sqrt(sum((u-v)^2))
 }
@@ -34,14 +33,15 @@ LOO = function(xl){
   l = dim(xl)[1]
   n = dim(xl)[2]-1
   
-  a=0.01
-  b=0.99
-  err = matrix(0, nrow=l, ncol=b/a)
+  a=0.02
+  b=0.98
+  k=50
+  err = matrix(0, nrow=k, ncol=b/a)
   
   for(j in 1:l){
     
     orderedXl = sortObjectsByDist(xl[-j,], c(xl[j, 1:2]))
-    for(i in 1:l-1){
+    for(i in 1:k){
       s=1
       for(q in seq(a, b, a)){
         
@@ -55,6 +55,11 @@ LOO = function(xl){
   }
   return(err)
 }
-xl=iris[,3:5]
 
-heatmap.2(LOO(xl),dendrogram='none', xlab='q', ylab='k', Colv=FALSE, Rowv=FALSE)
+xl=iris[,3:5]
+res = LOO(xl)
+
+minERR = which(res == min(res), arr.ind = TRUE)
+print(minERR)
+print(min(res))
+heatmap(res, xlab='q', ylab='k', Colv=NA, Rowv=NA)
