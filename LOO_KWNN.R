@@ -60,6 +60,10 @@ xl=iris[,3:5]
 res = LOO(xl)
 
 minERR = which(res == min(res), arr.ind = TRUE)
-print(minERR)
-print(min(res))
+for (i in 1:length(minERR)){
+  if(minERR[i] > 0){
+    print(minERR)
+    print(min(res))
+  }
+}
 heatmap(res, xlab='q', ylab='k', Colv=NA, Rowv=NA)
