@@ -142,3 +142,22 @@ LOO = function(xl){
 наименьшее число ошибок в результате работы алгоритма получилось для k=25, 30, 32, 33 при q=0.98, 0.96,0.96, 0.96 соответственно.
 
 <img src="https://github.com/VivaHades/SMPR/blob/main/LOO_KWNN.jpeg" />
+
+<table>
+ 
+ <tr>
+  <td> метод </td>
+  <td> параметры </td>
+  <td> % ошибок </td>
+ </tr>
+ <tr>
+  <td> KNN </td>
+  <td> k=6 </td>
+  <td> 34 </td>
+ </tr>
+ <tr>
+  <td> KWNN </td>
+  <td> k=25, q=0.96 </td>
+  <td> 33.3 </td>
+ </tr>
+ </table>
