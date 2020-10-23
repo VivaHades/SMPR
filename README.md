@@ -143,7 +143,7 @@ LOO = function(xl){
 
 <img src="https://github.com/VivaHades/SMPR/blob/main/LOO_KWNN.jpeg" />
 
-Сравнительная таблица методов KNN и KWNN
+## Сравнительная таблица методов KNN и KWNN ##
 
 <table>
  
