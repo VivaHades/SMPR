@@ -153,11 +153,11 @@ LOO = function(xl){
  <tr>
   <td> KNN </td>
   <td> k=6 </td>
-  <td> 34 </td>
+  <td> 3.4 </td>
  </tr>
  <tr>
   <td> KWNN </td>
   <td> k=25, q=0.96 </td>
-  <td> 33.3 </td>
+  <td> 3.33 </td>
  </tr>
  </table>
