@@ -84,5 +84,57 @@ kWNN = function(xl,z,k,q){
 
 ##LOO для KNN и KWNN##
 Для определения оптимальных параметров существует метод LOO. Суть его заключается в следующем: берем нашу обучающую выборку. Из нее извлекаем один элемент и запускаем алгоритм для всех комбинаций параметров. Если алгоритм классифицирует объект неправильно - добавляем одну ошибку. Повторяем это для всей выборки. В результате - получаем массив, в котором содержится количество ошибок для всех вариантов параметров. Найдя минимальный элемент массива получим наилучшие параметры.
-
 LOO для KNN
+```r
+LOO = function(xl){
+  l = dim(xl)[1]
+  n = dim(xl)[2]-1
+  err = array(0, 150)#массив ошибок
+  
+  for(j in 1:l){
+    #сортируем все объекты по расстоянию относительно j элементами
+    orderedXl = sortObjectsByDist(xl[-j,], c(xl[j, 1:2]))
+    for(i in 1:l){
+      class = kNN(i, orderedXl)   #определяем класс j объекта для всех k
+      if(class != xl[j, 3]){      #сравниваем вычисленные классы с реальным 
+        err[i] = err[i] + 1/l     
+      }
+    }
+  }
+  return(err)
+}
+```
+<img src="https://github.com/VivaHades/SMPR/blob/main/LOO_KNN.png" />
+В результате получаем, что опимальный k для выборки ирисов равен 6.
+
+LOO для KWNN
+```r
+LOO = function(xl){
+  l = dim(xl)[1]
+  n = dim(xl)[2]-1
+  
+  #границы q
+  a=0.02
+  b=0.98
+  k=50
+  err = matrix(0, nrow=k, ncol=b/a)
+  
+  for(j in 1:l){
+    
+    orderedXl = sortObjectsByDist(xl[-j,], c(xl[j, 1:2]))
+    for(i in 1:k){
+      s=1
+      for(q in seq(a, b, a)){
+        
+        class = kWNN(i, q, orderedXl)
+        if(class != xl[j, 3]){
+          err[i,s] = err[i,s] + 1/l
+        }
+        s = s + 1
+      }
+    }
+  }
+  return(err)
+}
+```
+<img src="https://github.com/VivaHades/SMPR/blob/main/LOO_KWNN.jpeg" />
