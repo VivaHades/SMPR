@@ -137,4 +137,5 @@ LOO = function(xl){
   return(err)
 }
 ```
+наименьшее число ошибок в результате работы алгоритма получилось для k=25, 30, 32, 33 при q=0.98, 0.96,0.96, 0.96 соответственно.
 <img src="https://github.com/VivaHades/SMPR/blob/main/LOO_KWNN.jpeg" />
